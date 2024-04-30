@@ -1,0 +1,15 @@
+Package: dlg
+Title: Dialog with User via the Console
+Version: 0.0.0.9000
+Authors@R:
+    person("Joseph", "Martineau", "A", "martineauj@gmail.com", role = c("aut", "cre"))
+Description: Functions to dialog with the user via the console.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports:
+    tidyverse, tibble, stringr, scales, uj, ppp, svDialogs
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10)
+LazyData: true
