@@ -7,7 +7,7 @@ Description: Functions to dialog with the user via the console.
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports:
-    tidyverse, tibble, stringr, scales, uj, ppp, svDialogs
+    tidyverse, tibble, stringr, scales, ppp, svDialogs
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 

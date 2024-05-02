@@ -227,7 +227,7 @@ ssplit <- function(x, d = "|") {base::trimws(dlg::av(base::strsplit(x, d, fixed 
 #' .fmt_errs(nullst = F, nullbg = F, nullfg = F)
 #' @export
 fmt_errs <- function(st = NULL, bg = NULL, fg = NULL, d = " ", nullst = TRUE, nullbg = TRUE, nullfg = TRUE) {
-  Fun  <- dlg::caller()
+  fun  <- dlg::caller()
   st   <- dlg::failsafe(st)
   bg   <- dlg::failsafe(bg)
   fg   <- dlg::failsafe(fg)
@@ -236,12 +236,12 @@ fmt_errs <- function(st = NULL, bg = NULL, fg = NULL, d = " ", nullst = TRUE, nu
   okBG <- dlg::f0(base::is.null(bg), nullbg, ppp:::.cmp_chr_scl(bg, .valid = base::c(dlg::.bgs(), base::toupper(dlg::.bgs()))))
   okFG <- dlg::f0(base::is.null(fg), nullfg, ppp:::.cmp_chr_scl(fg, .valid = base::c(dlg::.fgs(), base::toupper(dlg::.fgs()))))
   okD  <- ppp::.cmp_chr_scl(d)
-  Errs <- NULL
-  if (!okBG) {Errs <- base::c(Errs, "[bg] must be a character scalar from bg_vals().")}
-  if (!okFG) {Errs <- base::c(Errs, "[fg] must be a character scalar from fg_vals().")}
-  if (!okST) {Errs <- base::c(Errs, "[st] must be a unique character vec from st_vals().")}
-  if (!okD ) {Errs <- base::c(Errs, "[d] must be a non-NA character scalar.")}
-  if (!base::is.null(Errs)) {ppp::stopperr(Errs, .fun = Fun, .pkg = "dlg")}
+  errs <- NULL
+  if (!okBG) {errs <- base::c(errs, "[bg] must be a character scalar from bg_vals().")}
+  if (!okFG) {errs <- base::c(errs, "[fg] must be a character scalar from fg_vals().")}
+  if (!okST) {errs <- base::c(errs, "[st] must be a unique character vec from st_vals().")}
+  if (!okD ) {errs <- base::c(errs, "[d] must be a non-NA character scalar.")}
+  if (!base::is.null(errs)) {ppp::stopperr(errs, fun = fun, pkg = "dlg")}
 }
 
 #' @describeIn match_alias Matches any valid alias for background color.
@@ -364,19 +364,19 @@ choose_from <- function(opts, msg, all, none, min, max, ft, fs, fun, stk, clr, c
   else                          {base::cat(dlg::txt("Enter a comma separated list of codes for", min, "to", max, "of the above options:", d = " ", bg = tbg, fg = tfg, st = tst))}
   ans <- base::toupper(base::trimws(base::strsplit(base::readline(), ",", fixed = TRUE)[[1]], which = "both"))
   if (base::length(ans) == 1) {
-    if (can  & ans == "X") {ppp::stopperr("Canceled by user.", .fun = fun, .pkg = "dlg", stack = stk)}
+    if (can  & ans == "X") {ppp::stopperr("Canceled by user.", fun = fun, pkg = "dlg", stack = stk)}
     if (none & ans == "N") {return(NULL)}
     if (all  & ans == "A") {return(opts)}
     ans <- base::as.numeric(ans)
-    if (!ppp::cmp_psw_scl(ans)) {ppp::stopperr("Invalid selection code"                                         , .fun = fun, .pkg = "dlg", .stack = stk)}
-    if (1 < min               ) {ppp::stopperr("Too few options selected."                                      , .fun = fun, .pkg = "dlg", .stack = stk)}
-    if (ans > dlg::N(opts)    ) {ppp::stopperr("Selection code is greater than the number of available options.", .fun = fun, .pkg = "dlg", .stack = stk)}
+    if (!ppp::cmp_psw_scl(ans)) {ppp::stopperr("Invalid selection code"                                         , fun = fun, pkg = "dlg", stack = stk)}
+    if (1 < min               ) {ppp::stopperr("Too few options selected."                                      , fun = fun, pkg = "dlg", stack = stk)}
+    if (ans > dlg::N(opts)    ) {ppp::stopperr("Selection code is greater than the number of available options.", fun = fun, pkg = "dlg", stack = stk)}
   } else {
     ans <- base::as.numeric(ans)
-    if (!ppp::cmp_psw_vec(ans)       ) {ppp::stopperr("Unrecognized selection code(s)."                                  , .fun = fun, .pkg = "dlg", .stack = stk)}
-    if (dlg::N(ans) < min            ) {ppp::stopperr("Too few options selected."                                        , .fun = fun, .pkg = "dlg", .stack = stk)}
-    if (dlg::N(ans) > max            ) {ppp::stopperr("Too many options selected."                                       , .fun = fun, .pkg = "dlg", .stack = stk)}
-    if (base::any(ans > dlg::N(opts))) {ppp::stopperr("A selection code is greater than the number of available options.", .fun = fun, .pkg = "dlg", .stack = stk)}
+    if (!ppp::cmp_psw_vec(ans)       ) {ppp::stopperr("Unrecognized selection code(s)."                                  , fun = fun, pkg = "dlg", stack = stk)}
+    if (dlg::N(ans) < min            ) {ppp::stopperr("Too few options selected."                                        , fun = fun, pkg = "dlg", stack = stk)}
+    if (dlg::N(ans) > max            ) {ppp::stopperr("Too many options selected."                                       , fun = fun, pkg = "dlg", stack = stk)}
+    if (base::any(ans > dlg::N(opts))) {ppp::stopperr("A selection code is greater than the number of available options.", fun = fun, pkg = "dlg", stack = stk)}
   }
   opts[ans]
 }

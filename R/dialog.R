@@ -224,7 +224,7 @@ alert <- function(..., title = "alert", sub = "", ps = "", def = "", ft = "r|w|b
   if (!dlg::ok_fmt(fm)     ) {errs <- base::c(errs, "[fm] must be consistent with the description the [specifying formats] section of the [alert] topic of package [dlg] (?alert).")}
   if (!dlg::ok_fmt(fp)     ) {errs <- base::c(errs, "[fp] must be consistent with the description the [specifying formats] section of the [alert] topic of package [dlg] (?alert).")}
   if (!ppp::.cmp_chr_scl(d)) {errs <- base::c(errs, "[d] must be a complete character scalar (?cmp_chr_scl).")}
-  if (!base::is.null(errs)) {ppp::stopperr(errs, .pkg = "dlg")}
+  if (!base::is.null(errs)) {ppp::stopperr(errs, pkg = "dlg")}
   err <- title == "ERROR"
   if (clear) {
     base::gc(verbose = FALSE)
@@ -234,7 +234,7 @@ alert <- function(..., title = "alert", sub = "", ps = "", def = "", ft = "r|w|b
   if (sub   != "") {base::cat("\n", fmt(sub  , fs), "\n", sep = "")}
   if (msg   != "") {base::cat("\n", fmt(msg  , fm), "\n", sep = "")}
   if (ps    != "") {base::cat("\n", fmt(ps   , fp), "\n", sep = "")} else {cat("\n")}
-  if (err        ) {ppp::stopperr("", .pkg = "dlg")}
+  if (err        ) {ppp::stopperr("", pkg = "dlg")}
 }
 
 #' @rdname dialog
@@ -248,7 +248,7 @@ acknowledge <- function(..., sub = "", ps = "", ft = "r|w|b", fs = "k|y|p", fp =
 #' @rdname dialog
 #' @export
 choose1 <- function(opts, ..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE) {
-  if (!ppp::unq_atm_vec(opts)) {ppp::stopperr("[opts] must be a unique atomic vec (?unq_atm_vec).", .pkg = "dlg")}
+  if (!ppp::unq_atm_vec(opts)) {ppp::stopperr("[opts] must be a unique atomic vec (?unq_atm_vec).", pkg = "dlg")}
   msg <- dlg::p0(dlg::av(...), collapse = d)
   dlg::choose_from(opts, msg, F, F, 1, 1, ft, fs, "choose1", dlg::callers(), clear)
 }
@@ -263,7 +263,7 @@ chooseN <- function(opts, ..., n = NULL, min = NULL, max = NULL, all = base::is.
   if (!dlg::f0(base::is.null(n  ), T, ppp::.cmp_psw_scl(n  ))) {errs <- base::c(errs, "[n] must be NULL or a complete positive whole-number scalar (?cmp_psw_scl).")}
   if (!dlg::f0(base::is.null(min), T, ppp::.cmp_psw_scl(min))) {errs <- base::c(errs, "[min] must be NULL or a complete positive whole-number scalar (?cmp_psw_scl).")}
   if (!dlg::f0(base::is.null(max), T, ppp::.cmp_psw_scl(max))) {errs <- base::c(errs, "[max] must be NULL or a complete positive whole-number scalar (?cmp_psw_scl).")}
-  if (!base::is.null(errs)) {ppp::stopperr(errs, .pkg = "dlg")}
+  if (!base::is.null(errs)) {ppp::stopperr(errs, pkg = "dlg")}
   defMin   <- !base::is.null(min)
   defMax   <- !base::is.null(max)
   defN     <- !base::is.null(n)
@@ -281,7 +281,7 @@ chooseN <- function(opts, ..., n = NULL, min = NULL, max = NULL, all = base::is.
   if (!okMax   ) {errs <- base::c(errs, "[max] is out of bounds [max > length(opts)].")}
   if (!okCombo ) {errs <- base::c(errs, "When [n] is supplied, [min] and [max] must be NULL.")}
   if (!okMinMax) {errs <- base::c(errs, "[min] and [max] are inconsistent [min > max].")}
-  if (!base::is.null(errs)) {ppp::stopperr(errs, .pkg = "dlg")}
+  if (!base::is.null(errs)) {ppp::stopperr(errs, pkg = "dlg")}
   min <- dlg::f0(defN, n, dlg::f0(defMin, min, dlg::f0(none, 0, 1)))
   max <- dlg::f0(defN, n, dlg::f0(defMax, max, nOpts))
   dlg::choose_from(opts, msg, all, none, min, max, ft, fs, "chooseN", dlg::callers(), clear)
@@ -323,7 +323,7 @@ ask <- function(..., Default = "", sub = "", ft = "r|w|b", fs = "k|y|p", fm = ""
   dlg::alert(msg, title = "response required", sub = sub, ps = "enter your response:", ft = ft, fs = fs, fm = fm, fp = fp, d = d, clear = clear)
   ans <- base::readline()
   can <- dlg::f0(base::length == 0, T, ans == "{cancel}")
-  if (can) {ppp::stopperr("Action canceled by user.", .pkg = "dlg")}
+  if (can) {ppp::stopperr("Action canceled by user.", pkg = "dlg")}
   ans
 }
 
@@ -334,8 +334,8 @@ ask_new <- function(old, type = "replacement values", u = TRUE, sub = "", ft = "
   if (!ppp::.unq_atm_vec(old )) {errs <- base::c(errs, "[old] must be a unique atomic vec (?unq_atm_vec).")}
   if (!ppp::.cmp_str_scl(type)) {errs <- base::c(errs, "[type] must be a complete string scalar (?cmp_str_scl).")}
   if (!ppp::.cmp_lgl_scl(u   )) {errs <- base::c(errs, "[u] must be TRUE or FALSE.")}
-  if (!ppp::.cmp_ch1_scl(d   )) {errs <- base::c(errs, "[.sep] must be a single character.")}
-  if (!base::is.null(errs    )) {ppp::stopperr(errs, .pkg = "dlg")}
+  if (!ppp::.cmp_ch1_scl(d   )) {errs <- base::c(errs, "[d] must be a single character.")}
+  if (!base::is.null(errs    )) {ppp::stopperr(errs, pkg = "dlg")}
   D <- dlg::f0(d == "|", "pipe (|)",
        dlg::f0(d == ".", "dot (.)",
        dlg::f0(d == ":", "colon (:)",
@@ -354,28 +354,28 @@ ask_new <- function(old, type = "replacement values", u = TRUE, sub = "", ft = "
   ans  <- ans[ans != ""]
   nAns <- dlg::N(ans)
   can  <- dlg::f0(nAns == 0, T, dlg::f0(nAns > 1, F, ans == "{cancel}"))
-  if (can                   ) {ppp::stopperr("Action cancelled by user.", .pkg = "dlg")}
-  if (nAns != dlg::N(old)   ) {ppp::stopperr("Numbers of old and new values do not match.", .pkg = "dlg")}
-  if (u & !ppp::unq_vec(ans)) {ppp::stopperr("Replacement values are not unique.", .pkg = "dlg")}
+  if (can                   ) {ppp::stopperr("Action cancelled by user.", pkg = "dlg")}
+  if (nAns != dlg::N(old)   ) {ppp::stopperr("Numbers of old and new values do not match.", pkg = "dlg")}
+  if (u & !ppp::unq_vec(ans)) {ppp::stopperr("Replacement values are not unique.", pkg = "dlg")}
   ans
 }
 
 #' @rdname dialog
 #' @export
 choose_dir <- function(dir.type = "directory", sub = "", ft = "r|w|b", fs = "k|y|p", fm = "", fp = "k|y|i", d = " ", clear = FALSE) {
-  if (!ppp::.cmp_chr_scl(dir.type)) {ppp::stopperr("[dir.type] must be a complete character scalar (?cmp_chr_scl)", .pkg = "dlg")}
+  if (!ppp::.cmp_chr_scl(dir.type)) {ppp::stopperr("[dir.type] must be a complete character scalar (?cmp_chr_scl)", pkg = "dlg")}
   dlg::acknowledge(dlg::p0("In the next dialog box, select a ", dir.type, "."), sub = sub, ft = ft, fs = fs, fm = fm, fp = fp, d = d, clear = clear)
   path <- svDialogs::dlg_dir(title = dlg::p0("Select a ", dir.type, ":"))$res
-  if (base::length(path) == 0) {ppp::stopperr("Action canceled by user.", .pkg = "dlg")}
+  if (base::length(path) == 0) {ppp::stopperr("Action canceled by user.", pkg = "dlg")}
   path
 }
 
 #' @rdname dialog
 #' @export
 choose_doc <- function(doc.type = "document", sub = "", ft = "r|w|b", fs = "", fm = "", fp = "k|y|i", d = " ", clear = FALSE) {
-  if (!ppp::.cmp_chr_scl(doc.type)) {ppp::stopperr("[doc.type] must be a complete character scalar (?cmp_chr_scl)", .pkg = "dlg", clear = FALSE)}
+  if (!ppp::.cmp_chr_scl(doc.type)) {ppp::stopperr("[doc.type] must be a complete character scalar (?cmp_chr_scl)", pkg = "dlg", clear = FALSE)}
   dlg::acknowledge(dlg::p0("In the next dialog box, select a ", doc.type, "."), sub = sub, ft = ft, fs = fs, fm = fm, fp = fp, d = d, clear = clear)
   path <- svDialogs::dlg_open(title = dlg::p0("Select a ", doc.type, ":"))$res
-  if (base::length(path) == 0) {ppp::stopperr("Action canceled by user.", .pkg = "dlg")}
+  if (base::length(path) == 0) {ppp::stopperr("Action canceled by user.", pkg = "dlg")}
   path
 }
