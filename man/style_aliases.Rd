@@ -12,21 +12,16 @@
 \alias{.sts}
 \title{Style Aliases}
 \usage{
-style_aliases()
-
 .bld()
-
 .itl()
-
 .pln()
-
 .def()
-
 .und()
-
 .res()
 
 .sts()
+
+style_aliases()
 }
 \value{
 A character vector.
@@ -46,7 +41,7 @@ Each style is assigned a set of aliases, all of which will work in this package.
 
 \item \code{.und()}: All aliases for underline style.
 
-\item \code{.res()}: All aliases for foreground colors.
+\item \code{.res()}: All aliases for resetting styles and colors back to default values.
 
 \item \code{.sts()}: All aliases for styles.
 

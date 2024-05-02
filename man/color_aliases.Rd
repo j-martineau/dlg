@@ -16,29 +16,20 @@
 \alias{.fgs}
 \title{Color Aliases}
 \usage{
-color_aliases()
-
 .blk()
-
 .blu()
-
 .cyn()
-
 .grn()
-
 .mag()
-
 .red()
-
 .sil()
-
 .wht()
-
 .yel()
 
 .bgs()
-
 .fgs()
+
+color_aliases()
 }
 \value{
 A character vector.

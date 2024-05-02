@@ -23,7 +23,7 @@
 \alias{fg_sil}
 \alias{fg_slv}
 \alias{fg_wht}
-\alias{fg_ylw}
+\alias{fg_yel}
 \alias{fg}
 \alias{bg_blk}
 \alias{bg_blu}
@@ -33,146 +33,118 @@
 \alias{bg_mag}
 \alias{bg_red}
 \alias{bg_wht}
-\alias{bg_ylw}
+\alias{bg_yel}
 \alias{bg}
 \alias{txt}
 \title{Wrappers for Package \code{\link[crayon]{crayon}} Functions to Style and Color Console Text}
 \usage{
+txt(..., bg = NULL, fg = NULL, st = NULL, d = " ")
+
+bg(bg, ..., d = " ")
+fg(fg, ..., d = " ")
+st(st, ..., d = " ")
+
+bg_vals(bg = NULL)
+fg_vals(fg = NULL)
+st_vals(st = NULL)
+
+st_bld(..., d = " ")
+st_def(..., d = " ")
+st_itl(..., d = " ")
+st_pln(..., d = " ")
+st_und(..., d = " ")
+st_res(..., d = " ")
+
+fg_blk(..., d = " ")
+fg_blu(..., d = " ")
+fg_cyn(..., d = " ")
+fg_def(..., d = " ")
+fg_grn(..., d = " ")
+fg_gry(..., d = " ")
+fg_mag(..., d = " ")
+fg_red(..., d = " ")
+fg_sil(..., d = " ")
+fg_slv(..., d = " ")
+fg_wht(..., d = " ")
+fg_yel(..., d = " ")
+
+bg_blk(..., d = " ")
+bg_blu(..., d = " ")
+bg_cyn(..., d = " ")
+bg_def(..., d = " ")
+bg_grn(..., d = " ")
+bg_mag(..., d = " ")
+bg_red(..., d = " ")
+bg_wht(..., d = " ")
+bg_yel(..., d = " ")
+
 crayons()
-
-st_vals(.st = NULL)
-
-bg_vals(.bg = NULL)
-
-fg_vals(.fg = NULL)
-
-st_bld(..., .d = " ")
-
-st_def(..., .d = " ")
-
-st_itl(..., .d = " ")
-
-st_pln(..., .d = " ")
-
-st_und(..., .d = " ")
-
-st_res(..., .d = " ")
-
-st(.st, ..., .d = " ")
-
-fg_blk(..., .d = " ")
-
-fg_blu(..., .d = " ")
-
-fg_cyn(..., .d = " ")
-
-fg_def(..., .d = " ")
-
-fg_grn(..., .d = " ")
-
-fg_gry(..., .d = " ")
-
-fg_mag(..., .d = " ")
-
-fg_red(..., .d = " ")
-
-fg_sil(..., .d = " ")
-
-fg_slv(..., .d = " ")
-
-fg_wht(..., .d = " ")
-
-fg_ylw(..., .d = " ")
-
-fg(.fg, ..., .d = " ")
-
-bg_blk(..., .d = " ")
-
-bg_blu(..., .d = " ")
-
-bg_cyn(..., .d = " ")
-
-bg_def(..., .d = " ")
-
-bg_grn(..., .d = " ")
-
-bg_mag(..., .d = " ")
-
-bg_red(..., .d = " ")
-
-bg_wht(..., .d = " ")
-
-bg_ylw(..., .d = " ")
-
-bg(.bg, ..., .d = " ")
-
-txt(..., .bg = NULL, .fg = NULL, .st = NULL, .d = " ")
 }
 \arguments{
-\item{.st}{A quoted or unquoted, case-insensitive, character scalar text style from \code{st_vals()}. May also be \code{NULL} for function \code{st_vals}.}
+\item{st}{A quoted or unquoted, case-insensitive, character scalar text style from \code{st_vals()}. May also be \code{NULL} for function \code{st_vals}.}
 
-\item{.bg}{A quoted or unquoted, case-insensitive, character scalar text background color from \code{bg_vals()}. May also be \code{NULL} for function \code{bg_vals}.}
+\item{bg}{A quoted or unquoted, case-insensitive, character scalar text background color from \code{bg_vals()}. May also be \code{NULL} for function \code{bg_vals}.}
 
-\item{.fg}{A quoted or unquoted, case-insensitive, character scalar text foreground color from \code{fg_vals()}. May also be \code{NULL} for function \code{fg_vals}.}
+\item{fg}{A quoted or unquoted, case-insensitive, character scalar text foreground color from \code{fg_vals()}. May also be \code{NULL} for function \code{fg_vals}.}
 
-\item{...}{An arbitrary number of objects to be \link[=glue_dots]{collapsed} to a character scalar to be styled.}
+\item{...}{An arbitrary number of objects to be \link[=g]{collapsed} to a character scalar to be styled.}
 
-\item{.d}{A non-\code{NA} character scalar delimiter for \link[=glue_dots]{collapsing} \code{...} args into a character scalar.}
+\item{d}{A non-\code{NA} character scalar delimiter for \link[=g]{collapsing} \code{...} args into a character scalar.}
 }
 \value{
 \strong{A character vector} \cr\cr \verb{st_vals, fg_vals, bg_vals}
 \cr\cr  \strong{A character scalar} \cr\cr All others
 }
 \description{
-Functions in this family apply styles and colors to text for display on the console, where the text to display is identified by \link[=glue_dots]{collapsing} \code{...} args into a character scalar.
+Functions in this family apply styles and colors to text for display on the console, where the text to display is identified by \link[=g]{collapsing} \code{...} args into a character scalar.
 }
 \section{Background color functions}{
 
-\tabular{ll}{  \code{bg_vals}   \tab Get all valid values of arg \code{.bg}.                                   \cr
+\tabular{ll}{  \code{bg_vals}   \tab Get all valid values of arg \code{bg}.                                   \cr
   \code{bg_red}    \tab Set to red (\code{\link[crayon:bgRed]{crayon::bgRed}}).              \cr
   \code{bg_blu}    \tab Set to blue (\code{\link[crayon:bgBlue]{crayon::bgBlue}}).           \cr
   \code{bg_cyn}    \tab Set to cyan (\code{\link[crayon:bgCyan]{crayon::bgCyan}}).           \cr
   \code{bg_blk}    \tab Set to black (\code{\link[crayon:bgBlack]{crayon::bgBlack}}).        \cr
   \code{bg_grn}    \tab Set to green (\code{\link[crayon:bgGreen]{crayon::bgGreen}}).        \cr
   \code{bg_wht}    \tab Set to white (\code{\link[crayon:bgWhite]{crayon::bgWhite}}).        \cr
-  \code{bg_ylw}    \tab Set to yellow (\code{\link[crayon:bgYellow]{crayon::bgYellow}}).     \cr
+  \code{bg_yel}    \tab Set to yellow (\code{\link[crayon:bgYellow]{crayon::bgYellow}}).     \cr
   \code{bg_mag}    \tab Set to magenta (\code{\link[crayon:bgMagenta]{crayon::bgMagenta}}).  \cr
   \code{bg_def}    \tab Set to system default.                                               \cr
-  \code{bg}        \tab Set to value of arg \code{.bg}.                                              }
-\cr\cr Valid values of \code{.bg} are the following:
-\tabular{ll}{  magenta   \tab \code{'m'}, \code{'mag'}, \code{'magenta'} \cr
-  default   \tab \code{'d'}, \code{'def'}, \code{'default'} \cr
-  yellow    \tab \code{'y'}, \code{'ylw'}, \code{'yellow'}  \cr
-  black     \tab \code{'k'}, \code{'blk'}, \code{'black'}   \cr
-  white     \tab \code{'w'}, \code{'wht'}, \code{'white'}   \cr
-  green     \tab \code{'g'}, \code{'grn'}, \code{'green'}   \cr
-  blue      \tab \code{'b'}, \code{'blu'}, \code{'blue'}    \cr
-  cyan      \tab \code{'c'}, \code{'cyn'}, \code{'cyan'}    \cr
-  red       \tab \code{'r'}, \code{'red'}                }
+  \code{bg}        \tab Set to value of arg \code{bg}.                                              }
+Valid values of \code{bg} are the following:
+\tabular{ll}{  magenta   \tab \code{'m'}, \code{'mag'}, \code{'magenta'}        \cr
+  default   \tab \code{'d'}, \code{'def'}, \code{'default'}        \cr
+  yellow    \tab \code{'y'}, \code{'yel'},\code{'ylw'}, \code{'yellow'} \cr
+  black     \tab \code{'k'}, \code{'blk'}, \code{'black'}          \cr
+  white     \tab \code{'w'}, \code{'wht'}, \code{'white'}          \cr
+  green     \tab \code{'g'}, \code{'grn'}, \code{'green'}          \cr
+  blue      \tab \code{'b'}, \code{'blu'}, \code{'blue'}           \cr
+  cyan      \tab \code{'c'}, \code{'cyn'}, \code{'cyan'}           \cr
+  red       \tab \code{'r'}, \code{'red'}                       }
 NOTE: Silver (grey) is \emph{not} valid for \emph{background}.
 }
 
 \section{Foreground color functions}{
 
-\tabular{ll}{  \code{fg_vals}   \tab Get all valid values of \code{.fg} (foreground text color).              \cr
+\tabular{ll}{  \code{fg_vals}   \tab Get all valid values of \code{fg} (foreground text color).              \cr
   \code{fg_red}    \tab Set to red (\code{\link[crayon:red]{crayon::red}}).                 \cr
   \code{fg_blu}    \tab Set to red (\code{\link[crayon:blue]{crayon::blue}}).               \cr
   \code{fg_cyn}    \tab Set to red (\code{\link[crayon:cyan]{crayon::cyan}}).               \cr
   \code{fg_blk}    \tab Set to red (\code{\link[crayon:black]{crayon::black}}).             \cr
   \code{fg_grn}    \tab Set to red (\code{\link[crayon:green]{crayon::green}}).             \cr
   \code{fg_wht}    \tab Set to red (\code{\link[crayon:white]{crayon::white}}).             \cr
-  \code{fg_ylw}    \tab Set to red (\code{\link[crayon:yellow]{crayon::yellow}}).           \cr
+  \code{fg_yel}    \tab Set to red (\code{\link[crayon:yellow]{crayon::yellow}}).           \cr
   \code{fg_mag}    \tab Set to red (\code{\link[crayon:magenta]{crayon::magenta}}).         \cr
   \code{fg_gry}    \tab Set to silver (grey) (\code{\link[crayon:silver]{crayon::silver}}). \cr
   \code{fg_sil}    \tab Set to silver (grey).                                               \cr
   \code{fg_slv}    \tab Set to silver (grey).                                               \cr
   \code{fg_def}    \tab Set to system default.                                              \cr
-  \code{fg}        \tab Set to value of arg \code{.fg}.                                            }
-\cr\cr Valid values of \code{.fg} are :
+  \code{fg}        \tab Set to value of arg \code{fg}.                                            }
+Valid values of \code{fg} are :
 \tabular{ll}{  silver (grey)   \tab \code{'s'}, \code{'sil'}, \code{'slv'}, \code{'silver'}, \code{'gry'}, \code{'gray'}, \code{'grey'} \cr
   magenta         \tab \code{'m'}, \code{'mag'}, \code{'magenta'}                                      \cr
-  default         \tab \code{'.d'}, \code{'def'}, \code{'default'}                                     \cr
-  yellow          \tab \code{'y'}, \code{'ylw'}, \code{'yellow'}                                       \cr
+  default         \tab \code{'d'}, \code{'def'}, \code{'default'}                                     \cr
+  yellow          \tab \code{'y'}, \code{'yel'}, \code{'ylw'}, \code{'yellow'}                              \cr
   black           \tab \code{'k'}, \code{'blk'}, \code{'black'}                                        \cr
   white           \tab \code{'w'}, \code{'wht'}, \code{'white'}                                        \cr
   green           \tab \code{'g'}, \code{'grn'}, \code{'green'}                                        \cr
@@ -184,24 +156,29 @@ NOTE: Silver (grey) is \emph{only} valid for \emph{foreground}.
 
 \section{Style functions}{
 
-\tabular{ll}{  \code{st_vals}   \tab Get all valid values of arg \code{.st}.                              \cr
+\tabular{ll}{  \code{st_vals}   \tab Get all valid values of arg \code{st}.                              \cr
   \code{st_bld}    \tab Set to bold (\code{\link[crayon:bgRed]{crayon::bold}}).         \cr
   \code{st_pln}    \tab Set to plain (\code{\link[crayon:bgBlue]{crayon::reset}}).      \cr
   \code{st_itl}    \tab Set to italic (\code{\link[crayon:bgBlue]{crayon::italic}}).    \cr
   \code{st_und}    \tab Set to underline (\code{\link[crayon:bgBlue]{crayon::italic}}). \cr
   \code{st_def}    \tab Set to system default.                                          \cr
-  \code{st}        \tab Set to value of arg \code{.st}.                                        }
-\cr\cr Valid values of \code{st} are:
-\tabular{ll}{  underline   \tab \code{'u'}, \code{'un'}, \code{'und'}, \code{'under'}, \code{'underline'}, \code{'underlined'}                                                                         \cr   \tab   \cr
-  default     \tab \code{'.d'}, \code{'def'}, \code{'default'}                                                                                                             \cr   \tab   \cr
-  italic      \tab \code{'i'}, \code{'it'}, \code{'itl'}, \code{'ital'}, \code{'italic'}, \code{'italics'}, \code{'italicized'},\code{'e'}, \code{'em'}, \code{'emp'}, \code{'emph'}, \code{'emphasis'}, \code{'emphasized'} \cr   \tab   \cr
-  plain       \tab \code{'p'},\code{ 'pl'}, \code{'pln'}, \code{'plain'}, \code{'r'}, \code{'re'}, \verb{'res}', \code{'reset'}                                                                     \cr   \tab   \cr
-  bold        \tab \code{'b'}, \code{'bo'}, \code{'bld'}, \code{'bold'}, \code{'bolded'}, \code{'s'}, \code{'st'}, \code{'str'}, \code{'strong'}                                                                        }
+  \code{st}        \tab Set to value of arg \code{st}.                                        }
+Valid values of \code{st} are:
+\tabular{ll}{  underline   \tab \verb{'u', 'un', 'und', 'under', 'underline',}  \cr
+              \tab \code{'underlined'}                             \cr
+  default     \tab \verb{'d', 'def', 'default'}                    \cr
+  italic      \tab \verb{'i', 'it', 'itl', 'ital', 'italic',}      \cr
+              \tab \verb{'italics', 'italicized', 'e', 'em',}      \cr
+              \tab \verb{'emp', 'emph', 'emphasis', 'emphasized'}  \cr
+  plain       \tab \verb{'p', 'pl', 'pln', 'plain',  'r', 're',}   \cr
+              \tab \verb{'res', 'reset'}                           \cr
+  bold        \tab \verb{'b', 'bo', 'bld', 'bold', 'bolded', 's',} \cr
+              \tab \verb{'st', 'str', 'strong'}                      }
 }
 
 \section{Generic function}{
 
-\tabular{ll}{  \code{txt}   \tab Styles text using args \code{.st}, \code{.bg}, \code{.fg}.}
+\tabular{ll}{  \code{txt}   \tab Styles text using args \code{st}, \code{bg}, \code{fg}.}
 }
 
 \examples{
@@ -253,7 +230,7 @@ st_vals("underline")
   cat(fg_mag(egArg1, egArg2))
   cat(fg_red(egArg1, egArg2))
   cat(fg_wht(egArg1, egArg2))
-  cat(fg_ylw(egArg1, egArg2))
+  cat(fg_yel(egArg1, egArg2))
   cat(fg_def(egArg1, egArg2))
 
   cat(fg("s", egArg1, egArg2, "note"))
@@ -268,7 +245,7 @@ st_vals("underline")
   cat(bg_mag(egArg1, egArg2, "note"))
   cat(bg_red(egArg1, egArg2, "note"))
   cat(bg_wht(egArg1, egArg2, "note"))
-  cat(bg_ylw(egArg1, egArg2, "note"))
+  cat(bg_yew(egArg1, egArg2, "note"))
   cat(bg_def(egArg1, egArg2, "note"))
 
   cat(bg("y"     , egArg1, egArg2, "note"))
@@ -277,6 +254,6 @@ st_vals("underline")
 
   cat(bg("y", fg("r", st("u", st("i", egArg1, egArg2, "note")))))
 
-  cat(txt(egArg1, egArg2, "note", .bg = "blue", .fg = "w", .st = c("i", "under")))
+  cat(txt(egArg1, egArg2, "note", bg = "blue", fg = "w", st = c("i", "under")))
 }
 }
