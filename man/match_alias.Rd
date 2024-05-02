@@ -8,13 +8,13 @@
 \alias{match_alias}
 \title{Match Color or Style Aliases}
 \usage{
-
 match_bg(x)
+
 match_fg(x)
+
 match_st(x)
 
 match_alias()
-
 }
 \arguments{
 \item{x}{A character scalar alias.}
@@ -40,12 +40,20 @@ cat("\n\nFOREGROUND COLORS"); for (f in 1:bgs()) {cat("\n'", match_fg(f), "' << 
 cat("\n\nTEXT STYLES"      ); for (s in 1:sts()) {cat("\n'", match_st(s), "' << '", s, "'", sep = "")}
 }
 \seealso{
-Other utils:
+Other utils: 
+\code{\link{N}()},
+\code{\link{av}()},
 \code{\link{choose_from}()},
+\code{\link{f0}()},
 \code{\link{fmt_errs}()},
+\code{\link{fmt_stack}()},
+\code{\link{fs_t}()},
+\code{\link{g0}()},
 \code{\link{glu}()},
+\code{\link{g}()},
+\code{\link{is_err}()},
 \code{\link{ok_fmt}()},
-\code{\link{re_exports}()},
+\code{\link{p0}()},
 \code{\link{ssplit}()},
 \code{\link{trm}()}
 }

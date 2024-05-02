@@ -1,44 +1,176 @@
 #' @encoding UTF-8
 #' @family utils
-#' @title Re-exports from Package `uj`
+#' @title Glue \link[=av]{Atomized} `...` Arg Atomic Elements into a Character Scalar
+#' @description Flattens `...` to a character vector and glues the resulting elements using `g` as the glue.
+#' @param g Character scalar glue to use as delimiter.
+#' @param ... Objects to be \link[=av]{atomized}.
+#' @return A character scalar.
 #' @export
-re_exports <- function() {utils::help("re_exports", package = "dlg")}
+g <- function(g, ...) {base::paste(dlg::av(...), collapse = g)}
 
-#' @describeIn re_exports See \code{\link[uj]{g}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Thin Wrapper for \code{\link[base]{length}}
+#' @return A positive integer scalar.
 #' @export
-g <- uj::g
+N <- base::length
 
-#' @describeIn re_exports See \code{\link[uj]{N}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Atomize
+#' @description Flattens `...` to an atomic vector of atomic constituent values.
+#' @param ... Objects to atomized.
+#' @return An atomic vector
 #' @export
-N <- uj::N
+av <- function(...) {
+  x <- base::as.vector(base::unlist(base::list(...), T, F))
+  base::attributes(x) <- NULL
+  x
+}
 
-#' @describeIn re_exports See \code{\link[uj]{av}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Enhancements of \code{\link[base]{ifelse}}.
+#' @description If `x` is scalar `TRUE`, returns `y`. If `x` is anything else, returns `n`.
+#' @param x A logical scalar (if not,`x` it is replaced by `FALSE`).
+#' @param y,n Any valid R object.
+#' @param .d A character scalar delimiter for collapsing objects into scalar character objects. If `.d` is not a character scalar, it is replaced by `" "`.
+#' @param .cond A character scalar in `c('all', 'any', 'none')`. If `.cond` is not of an allowed value, it is replaced by `'all'`.
+#' @return An arbitrary object (either `y` or `n`).
+#' @examples
+#' f0(NA, data.frame(letters = letters), 0:26)
+#' f0(TRUE, data.frame(letters = letters), 0:26)
+#' f0(FALSE, data.frame(letters = letters), 0:26)
+#' f0(list(1, "a"), data.frame(letters = letters), 0:26)
+#' f0(c(.bad.var.name.), data.frame(letters = letters), 0:26)
 #' @export
-av <- uj::av
+f0 <- function(x, y, n) {if (base::isTRUE(dlg::failsafe(x))) {dlg::failsafe(y)} else {dlg::failsafe(n)}}
 
-#' @describeIn re_exports See \code{\link[uj]{f0}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title `paste0(av(...), collapse = "")`
+#' @return A character scalar.
 #' @export
-f0 <- uj::f0
+g0 <- function(...) {base::paste0(dlg::av(...), collapse = "")}
 
-#' @describeIn re_exports See \code{\link[uj]{g0}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Thin Wrapper for \code{\link[base]{paste0}}
+#' @return A positive integer scalar.
 #' @export
-g0 <- uj::g0
+p0 <- base::paste0
 
-#' @describeIn re_exports See \code{\link[uj]{p0}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Checks Whether Evaluation `x` Produces and Error
+#' @param x An object to be evaluated.
+#' @return A logical scalar
 #' @export
-p0 <- uj::p0
+is_err <- function(x) {rlang::is_error(tryCatch(base::identity(x), error = function(e) e, finally = NULL))}
 
-#' @describeIn re_exports See \code{\link[uj]{caller}}.
+#' @encoding UTF-8
+#' @family utils
+#' @title Failsafe Evaluation of Whether `x` Is Scalar `TRUE`
+#' @param x An object to be evaluated for scalar `TRUE`-ness.
+#' @return A logical scalar
 #' @export
-caller <- uj::caller
+fs_t <- function(x) {if (dlg::is_err(x)) {FALSE} else {base::isTRUE(x)}}
 
-#' @describeIn re_exports See \code{\link[uj]{callers}}.
+#' @encoding UTF-8
+#' @family environments
+#' @family meta
+#' @title Function names and counts in the call stack
+#' @description This family of functions addresses the function call stack *from the perspective of a function that calls one of the functions in this family*. Consistent with that perspective, the basic terminology this family of functions uses is the following:
+#' \tabular{ll}{  **Terminology**   \tab **Function identity** \cr
+#'                "command line"    \tab The command line      \cr
+#'                "caller"          \tab Parent function       \cr
+#'                "callers"         \tab All parent functions    }
+#' @param n A \link[cmp_psw_vec]{complete positive whole-number scalar} giving the number of generations back in the function call stack to go.
+#' @param .err `TRUE` or `FALSE` indicating whether to throw an error if one is encountered.
+#' @param .scl `TRUE` or `FALSE` indicating whether to collapse package and function into a character scalar rather than as a two element list with one element for packages and another for functions.
+#' @param .vec `TRUE` or `FALSE` indicating whether to represent both package and function in a character vector rather than as a two element list with one element for packages and another for functions.
+#' @param ... An arbitrary number of \link[=cmp_psw_vec]{complete positive whole-number vecs} giving the number(s) of generations back in the function call stack to go.
+#' @return **A `list(pkg = <character vector>, fun = <character vector>)`** \cr\cr  When `vec = FALSE` or `scl = FALSE`.
+#' \cr\cr  **A character vector** (when `vec = TRUE`)                       \cr\cr `callers`
+#' \cr\cr  **A character scalar** (when `scl = TRUE`)                       \cr\cr `caller`
+#' @examples
+#' egD <- function() {list(caller    = caller()                 ,
+#'                         callers   = callers()                )}
+#' egC <- function() {list(caller    = caller()                 ,
+#'                         callers   = callers()                ,
+#'                         egD       = egD()                    )}
+#' egB <- function() {list(caller    = caller()                 ,
+#'                         callers   = callers()                ,
+#'                         egC       = egC()                    )}
+#' egA <- function() {list(caller    = caller()                 ,
+#'                         callers   = callers()                ,
+#'                         egB       = egB()                    )}
+#' egA()
+#' av(egA())
 #' @export
-callers <- uj::callers
+callers <- function(.vec = TRUE) {
+  if (!dlg::fs_t(.vec)) {.vec <- F}
+  Stack <- base::c(base::rev(base::as.character(base::sys.calls())), "..r..::..command.line..()")
+  if (base::length(Stack) == 2) {Stack <- base::c(Stack, "..r..::..command.line..()")}
+  dlg::fmt_stack(Stack[3:base::length(Stack)])
+}
 
-#' @describeIn re_exports See \code{\link[uj]{failsafe}}.
+#' @rdname callers
 #' @export
-failsafe <- uj::failsafe
+caller <- function(.scl = TRUE) {
+  if (!dlg::fs_t(.scl)) {.scl <- F}
+  Stack <- base::sys.calls()
+  Stack <- base::c(base::rev(base::as.character(Stack)), "..r..::..command.line..()")
+  if (base::length(Stack) == 2) {Stack <- base::c(Stack, "..r..::..command.line..()")}
+  dlg::fmt_stack(Stack[3])
+}
+
+#' @encoding UTF-8
+#' @family extensions
+#' @family logicals
+#' @family errs
+#' @title Failsafe Evaluation of an Object
+#' @description Evaluate objects, test if an object has certain properties, and conduct binary logical operations safely. these functions never stop execution; they always produce a valid result, even if that result is an error object.
+#' @param x Any object/expression to be evaluated, whether or not doing so produces an error.
+#' @param .def A character scalar default error message if forcing evaluation produces an error. If not a character scalar, it is replaced with the default.
+#' @return Either `x` or the object `.def` with the attribute `'stack'` composed of the function call stack as a character vector.
+#' @examples
+#' failsafe(non.existent.variable)
+#' failsafe(pi)
+#' @export
+failsafe <- function(x, .def = "dlg.failsafe.err") {
+  .def <- tryCatch(base::identity(.def), error = function(e) e, finally = NULL)
+  if (rlang::is_error(.def)) {.def <- "dlg.failsafe.err"}
+  x <- tryCatch(base::identity(x), error = function(e) e, finally = NULL)
+  if (rlang::is_error(x)) {
+    base::attr(.def, "stack") <- dlg::callers()
+    .def
+  } else {x}
+}
+
+#' @encoding UTF-8
+#' @family utils
+#' @title Conver the Call Stack to a Character Vector of Function Names
+#' @param stack A character vector call stack
+#' @return A character vector
+#' @export
+fmt_stack <- function(stack) {
+  fun <- function(x) {
+    def <- "..unknown.."
+    x <- dlg::ssplit(x, d = "(")[1]
+    x <- dlg::ssplit(x, d = ":::")
+    x <- dlg::ssplit(x, d = "::")
+    x <- base::trimws(x, which = "both")
+    x <- x[x != ""]
+    dlg::f0(dlg::N(x) == 0, def, x[1])
+  }
+  default <- "..??.."
+  stack <- base::sapply(stack, fun)
+  valid <- stack != default
+  stack <- stack[valid]
+  stack[stack == "..command.line.."] <- "[command.line]"
+  stack
+}
 
 #' @encoding UTF-8
 #' @family utils
@@ -69,12 +201,13 @@ trm <- function(..., d = " ") {base::trimws(dlg::glu(..., d = d), which = "both"
 #' @family utils
 #' @title Split Strings along Pipes and Trim Whitespace from Both Sides of All Resulting Elements
 #' @param x An object of mode character.
+#' @param d Character scalar text delimiter.
 #' @return A character vector
 #' @examples
 #' ssplit(" Just | a | little | thing ")
 #' ssplit("  Just  |  a  |  little  |  thing  ")
 #' @export
-ssplit <- function(x) {base::trimws(dlg::av(base::strsplit(x, "|", fixed = T)), which = "both", whitespace = "[ ]")}
+ssplit <- function(x, d = "|") {base::trimws(dlg::av(base::strsplit(x, d, fixed = T)), which = "both", whitespace = "[ ]")}
 
 #' @encoding UTF-8
 #' @family utils

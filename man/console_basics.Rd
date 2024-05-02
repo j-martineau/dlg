@@ -9,13 +9,15 @@
 \alias{xcon}
 \title{User updates and interaction via the console in default color and style}
 \usage{
-xcon()
+console_basics()
+
 say(..., lev = 0, sub = 0, clear = FALSE)
+
 cat0(..., clear = FALSE)
 
 continue(clear = FALSE)
 
-console_basics()
+xcon()
 }
 \arguments{
 \item{...}{An arbitrary number of atomic arguments to be atomized collapsed into a character scalar message to the user. If no values are supplied and \code{lev = NA} or \code{lev = 6}, prints a single dot (\code{.}) immediately following the current contents of the console.}
@@ -81,7 +83,10 @@ chat.()
 \dontrun{continue()}
 }
 \seealso{
-Other user:
+Other meta: 
+\code{\link{callers}()}
+
+Other user: 
 \code{\link{dialog}}
 }
 \concept{meta}

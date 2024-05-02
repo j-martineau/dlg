@@ -17,22 +17,101 @@
 \alias{choose_doc}
 \title{Console-Based User Dialog (may also use package \code{svDialogs} functions)}
 \usage{
-alert(..., title = "alert", sub = "", ps = "", def = "", ft = "r|w|b", fs = "k|y|p", fm = "", fp = "k|y|i", d = " ", clear = FALSE)
-acknowledge(..., sub = "", ps = "", ft = "r|w|b", fs = "k|y|p", fp = "k|y|i", d = " ", clear = FALSE)
+alert(
+  ...,
+  title = "alert",
+  sub = "",
+  ps = "",
+  def = "",
+  ft = "r|w|b",
+  fs = "k|y|p",
+  fm = "",
+  fp = "k|y|i",
+  d = " ",
+  clear = FALSE
+)
+
+acknowledge(
+  ...,
+  sub = "",
+  ps = "",
+  ft = "r|w|b",
+  fs = "k|y|p",
+  fp = "k|y|i",
+  d = " ",
+  clear = FALSE
+)
 
 choose1(opts, ..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
-chooseN(opts, ..., n = NULL, min = NULL, max = NULL, all = base::is.null(c(n, max)), none = FALSE, ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
+
+chooseN(
+  opts,
+  ...,
+  n = NULL,
+  min = NULL,
+  max = NULL,
+  all = base::is.null(c(n, max)),
+  none = FALSE,
+  ft = "r|w|b",
+  fs = "k|y|p",
+  d = " ",
+  clear = FALSE
+)
 
 NO(..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
+
 YES(..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
+
 OK(..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
+
 CANCEL(..., ft = "r|w|b", fs = "k|y|p", d = " ", clear = FALSE)
 
-ask(..., Default = "", sub = "", ft = "r|w|b", fs = "k|y|p", fm = "", fp = "k|y|i", d = " ", clear = FALSE)
-ask_new(old, type = "replacement values", u = TRUE, sub = "", ft = "r|w|b", fs = "k|y|p", fm = "", fp = "k|y|i", d = "|", clear = FALSE)
+ask(
+  ...,
+  Default = "",
+  sub = "",
+  ft = "r|w|b",
+  fs = "k|y|p",
+  fm = "",
+  fp = "k|y|i",
+  d = " ",
+  clear = FALSE
+)
 
-choose_dir(dir.type = "directory", sub = "", ft = "r|w|b", fs = "k|y|p", fm = "", fp = "k|y|i", d = " ", clear = FALSE)
-choose_doc(doc.type = "document", sub = "", ft = "r|w|b", fs = "", fm = "", fp = "k|y|i", d = " ", clear = FALSE)
+ask_new(
+  old,
+  type = "replacement values",
+  u = TRUE,
+  sub = "",
+  ft = "r|w|b",
+  fs = "k|y|p",
+  fm = "",
+  fp = "k|y|i",
+  d = "|",
+  clear = FALSE
+)
+
+choose_dir(
+  dir.type = "directory",
+  sub = "",
+  ft = "r|w|b",
+  fs = "k|y|p",
+  fm = "",
+  fp = "k|y|i",
+  d = " ",
+  clear = FALSE
+)
+
+choose_doc(
+  doc.type = "document",
+  sub = "",
+  ft = "r|w|b",
+  fs = "",
+  fm = "",
+  fp = "k|y|i",
+  d = " ",
+  clear = FALSE
+)
 }
 \arguments{
 \item{...}{An arbitrary, optional number of arguments which are \link[=av]{atomized} into a character scalar message to be posted to the console.}
@@ -260,7 +339,7 @@ all other templates incorporate a call to \code{alert(.)} with components as sho
 }
 }
 \seealso{
-Other user:
+Other user: 
 \code{\link{console_basics}()}
 }
 \concept{dialogs}

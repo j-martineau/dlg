@@ -12,16 +12,21 @@
 \alias{.sts}
 \title{Style Aliases}
 \usage{
+style_aliases()
+
 .bld()
+
 .itl()
+
 .pln()
+
 .def()
+
 .und()
+
 .res()
 
 .sts()
-
-style_aliases()
 }
 \value{
 A character vector.

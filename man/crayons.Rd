@@ -38,47 +38,75 @@
 \alias{txt}
 \title{Wrappers for Package \code{\link[crayon]{crayon}} Functions to Style and Color Console Text}
 \usage{
-txt(..., bg = NULL, fg = NULL, st = NULL, d = " ")
+crayons()
 
-bg(bg, ..., d = " ")
-fg(fg, ..., d = " ")
-st(st, ..., d = " ")
-
-bg_vals(bg = NULL)
-fg_vals(fg = NULL)
 st_vals(st = NULL)
 
+bg_vals(bg = NULL)
+
+fg_vals(fg = NULL)
+
 st_bld(..., d = " ")
+
 st_def(..., d = " ")
+
 st_itl(..., d = " ")
+
 st_pln(..., d = " ")
+
 st_und(..., d = " ")
+
 st_res(..., d = " ")
 
+st(st, ..., d = " ")
+
 fg_blk(..., d = " ")
+
 fg_blu(..., d = " ")
+
 fg_cyn(..., d = " ")
+
 fg_def(..., d = " ")
+
 fg_grn(..., d = " ")
+
 fg_gry(..., d = " ")
+
 fg_mag(..., d = " ")
+
 fg_red(..., d = " ")
+
 fg_sil(..., d = " ")
+
 fg_slv(..., d = " ")
+
 fg_wht(..., d = " ")
+
 fg_yel(..., d = " ")
 
+fg(fg, ..., d = " ")
+
 bg_blk(..., d = " ")
+
 bg_blu(..., d = " ")
+
 bg_cyn(..., d = " ")
+
 bg_def(..., d = " ")
+
 bg_grn(..., d = " ")
+
 bg_mag(..., d = " ")
+
 bg_red(..., d = " ")
+
 bg_wht(..., d = " ")
+
 bg_yel(..., d = " ")
 
-crayons()
+bg(bg, ..., d = " ")
+
+txt(..., bg = NULL, fg = NULL, st = NULL, d = " ")
 }
 \arguments{
 \item{st}{A quoted or unquoted, case-insensitive, character scalar text style from \code{st_vals()}. May also be \code{NULL} for function \code{st_vals}.}
